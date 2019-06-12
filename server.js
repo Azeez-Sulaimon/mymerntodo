@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
 const path = require("path");
+const dotEnv = require("dotenv").config();
 
-const API_PORT = 3000;
+const API_PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 const router = express.Router();
@@ -16,7 +17,7 @@ const dbRoute =
 "mongodb+srv://admin-omoade:Dandee86@cluster0-zhymz.mongodb.net/jelotest";
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect( process.env.MONGODB_URI || dbRoute, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 
