@@ -14,7 +14,7 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute =
-"mongodb+srv://admin-omoade:Dandee86@cluster0-zhymz.mongodb.net/jelotest";
+"mongodb://omoade:Dandee86@ds237267.mlab.com:37267/heroku_0v6vqhwc";
 
 // connects our back end code with the database
 mongoose.connect( process.env.MONGODB_URI || dbRoute, { useNewUrlParser: true });
@@ -34,7 +34,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+if(process.env.NODE_ENV === "production"){
 app.use(express.static(path.join(__dirname, "client", "build")));
+}
 
 // this is our get method
 // this method fetches all available data in our database
